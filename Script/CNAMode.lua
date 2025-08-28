@@ -1,0 +1,3 @@
+local CNAMode = {}
+
+return CNAMode

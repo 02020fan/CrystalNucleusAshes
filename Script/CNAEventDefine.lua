@@ -1,0 +1,3 @@
+local CNAEventDefine = {}
+
+return CNAEventDefine
