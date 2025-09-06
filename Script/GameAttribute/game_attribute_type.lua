@@ -15,6 +15,8 @@ UGCNativeGameAttributeType = {
 	Character_SignalHP = 'SignalHP',
 	--Character [最大信号值-SignalHPMax],
 	Character_SignalHPMax = 'SignalHPMax',
+	--Character [声音检查距离(发生端)-voiceCheckDis],
+	Character_voiceCheckDis = 'voiceCheckDis',
 	--Character [呼吸值-Breath],
 	Character_Breath = 'Breath',
 	--Character [额外速度值-AdditiveSpeedValueWrapper],
@@ -23,6 +25,12 @@ UGCNativeGameAttributeType = {
 	Character_EnergyCurrent = 'Energy|EnergyCurrent',
 	--Character [UGC移动速度倍率-UGCGeneralMoveSpeedScale],
 	Character_UGCGeneralMoveSpeedScale = 'UGCGeneralMoveSpeedScale',
+	--Character [救援速率-RescueOtherDurationRate],
+	Character_RescueOtherDurationRate = 'RescueOtherDurationRate',
+	--Character [连跳次数-JumpCountLimit],
+	Character_JumpCountLimit = 'JumpCountLimit',
+	--Character [跳跃速度-JumpZSpeed],
+	Character_JumpZSpeed = 'JumpZSpeed',
 
 ---------------------------------------------------------
 
@@ -106,6 +114,47 @@ UGCNativeGameAttributeType = {
 	Weapon_BurstShootBulletsNumWrapper = 'BurstShootBulletsNumWrapper',
 	--Weapon [UGC连发子弹间隔-BurstShootIntervalWrapper],
 	Weapon_BurstShootIntervalWrapper = 'BurstShootIntervalWrapper',
+
+---------------------------------------------------------
+
+	--Vehicle [当前血量-CurrentHP],
+	Vehicle_Internal_CurrentHP = 'CurrentHP',
+	--Vehicle [最大血量-MaxHP],
+	Vehicle_Internal_MaxHP = 'MaxHP',
+	--Vehicle [当前油量-CurrentFuel],
+	Vehicle_Internal_CurrentFuel = 'CurrentFuel',
+	--Vehicle [最大油量-MaxFuel],
+	Vehicle_Internal_MaxFuel = 'MaxFuel',
+	--Vehicle [耗油系数-FuelConsumeFactor],
+	Vehicle_Internal_FuelConsumeFactor = 'FuelConsumeFactor',
+	--Vehicle [撞车时对载具冲量吸收-ImpactAbsorption],
+	Vehicle_Internal_ImpactAbsorption = 'ImpactAbsorption',
+	--Vehicle [撞车时对乘客冲量吸收-ImpactAbsorptionPassenger],
+	Vehicle_Internal_ImpactAbsorptionPassenger = 'ImpactAbsorptionPassenger',
+	--Vehicle [撞车时对乘客伤害上限-HitDamagePassengerMaxHP],
+	Vehicle_Internal_HitDamagePassengerMaxHP = 'HitDamagePassengerMaxHP',
+	--Vehicle [载具爆炸基础伤害-ExplosionBaseDamage],
+	Vehicle_Internal_ExplosionBaseDamage = 'ExplosionBaseDamage',
+	--Vehicle [载具爆炸最小伤害-ExplosionMinimumDamage],
+	Vehicle_Internal_ExplosionMinimumDamage = 'ExplosionMinimumDamage',
+	--Vehicle [加速油耗系数-FuelConsumptionModifierBoost],
+	Vehicle_Internal_FuelConsumptionModifierBoost = 'FuelConsumptionModifierBoost',
+	--Vehicle [加速动力系数(不同载具动力表达会有所区别)-BoostModifier],
+	Vehicle_Internal_BoostModifier = 'BoostModifier',
+	--Vehicle [线性阻尼(影响陆地载具和船)-LinearDamping],
+	Vehicle_Internal_LinearDamping = 'LinearDamping',
+	--Vehicle [旋转阻尼(影响陆地载具和船)-AngularDamping],
+	Vehicle_Internal_AngularDamping = 'AngularDamping',
+	--Vehicle [最大加速度(仅影响船载具)-MaxAcceleration],
+	Vehicle_Internal_MaxAcceleration = 'MaxAcceleration',
+	--Vehicle [加速度增加速率(仅影响船载具)-StartAccelerationRate],
+	Vehicle_Internal_StartAccelerationRate = 'StartAccelerationRate',
+	--Vehicle [倒车时加速度缩放值(仅影响船载具)-BackwardForceScale],
+	Vehicle_Internal_BackwardForceScale = 'BackwardForceScale',
+	--Vehicle [最大转向角(仅影响船载具)-MaxRotationYawAngle],
+	Vehicle_Internal_MaxRotationYawAngle = 'MaxRotationYawAngle',
+	--Vehicle [最大速度限制(0表示无限速，仅影响船载具)-MaxVelocity],
+	Vehicle_Internal_MaxVelocity = 'MaxVelocity',
 }; 
 
 UGCNativeGameAttributeTypeCommentMap = { 
@@ -117,10 +166,14 @@ UGCNativeGameAttributeTypeCommentMap = {
 	['SkillCDRecoverRate'] = 'Character [技能急速-SkillCDRecoverRate]', 
 	['SignalHP'] = 'Character [信号值-SignalHP]', 
 	['SignalHPMax'] = 'Character [最大信号值-SignalHPMax]', 
+	['voiceCheckDis'] = 'Character [声音检查距离(发生端)-voiceCheckDis]', 
 	['Breath'] = 'Character [呼吸值-Breath]', 
 	['AdditiveSpeedValueWrapper'] = 'Character [额外速度值-AdditiveSpeedValueWrapper]', 
 	['Energy|EnergyCurrent'] = 'Character [当前能量值-EnergyCurrent]', 
 	['UGCGeneralMoveSpeedScale'] = 'Character [UGC移动速度倍率-UGCGeneralMoveSpeedScale]', 
+	['RescueOtherDurationRate'] = 'Character [救援速率-RescueOtherDurationRate]', 
+	['JumpCountLimit'] = 'Character [连跳次数-JumpCountLimit]', 
+	['JumpZSpeed'] = 'Character [跳跃速度-JumpZSpeed]', 
 
 ---------------------------------------------------------
 
@@ -164,6 +217,28 @@ UGCNativeGameAttributeTypeCommentMap = {
 	['BurstShootCDWrapper'] = 'Weapon [UGC连发射击间隔-BurstShootCDWrapper]', 
 	['BurstShootBulletsNumWrapper'] = 'Weapon [UGC连发数量-BurstShootBulletsNumWrapper]', 
 	['BurstShootIntervalWrapper'] = 'Weapon [UGC连发子弹间隔-BurstShootIntervalWrapper]', 
+
+---------------------------------------------------------
+
+	['CurrentHP'] = 'Vehicle [当前血量-CurrentHP]', 
+	['MaxHP'] = 'Vehicle [最大血量-MaxHP]', 
+	['CurrentFuel'] = 'Vehicle [当前油量-CurrentFuel]', 
+	['MaxFuel'] = 'Vehicle [最大油量-MaxFuel]', 
+	['FuelConsumeFactor'] = 'Vehicle [耗油系数-FuelConsumeFactor]', 
+	['ImpactAbsorption'] = 'Vehicle [撞车时对载具冲量吸收-ImpactAbsorption]', 
+	['ImpactAbsorptionPassenger'] = 'Vehicle [撞车时对乘客冲量吸收-ImpactAbsorptionPassenger]', 
+	['HitDamagePassengerMaxHP'] = 'Vehicle [撞车时对乘客伤害上限-HitDamagePassengerMaxHP]', 
+	['ExplosionBaseDamage'] = 'Vehicle [载具爆炸基础伤害-ExplosionBaseDamage]', 
+	['ExplosionMinimumDamage'] = 'Vehicle [载具爆炸最小伤害-ExplosionMinimumDamage]', 
+	['FuelConsumptionModifierBoost'] = 'Vehicle [加速油耗系数-FuelConsumptionModifierBoost]', 
+	['BoostModifier'] = 'Vehicle [加速动力系数(不同载具动力表达会有所区别)-BoostModifier]', 
+	['LinearDamping'] = 'Vehicle [线性阻尼(影响陆地载具和船)-LinearDamping]', 
+	['AngularDamping'] = 'Vehicle [旋转阻尼(影响陆地载具和船)-AngularDamping]', 
+	['MaxAcceleration'] = 'Vehicle [最大加速度(仅影响船载具)-MaxAcceleration]', 
+	['StartAccelerationRate'] = 'Vehicle [加速度增加速率(仅影响船载具)-StartAccelerationRate]', 
+	['BackwardForceScale'] = 'Vehicle [倒车时加速度缩放值(仅影响船载具)-BackwardForceScale]', 
+	['MaxRotationYawAngle'] = 'Vehicle [最大转向角(仅影响船载具)-MaxRotationYawAngle]', 
+	['MaxVelocity'] = 'Vehicle [最大速度限制(0表示无限速，仅影响船载具)-MaxVelocity]', 
 }; 
 
 ---@enum UGCCustomGameAttributeType

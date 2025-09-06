@@ -1,0 +1,36 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "LuaHelper-Debug",
+			"request": "launch",
+			"name": "LuaHelper-Attach",
+			"program": "",
+			"description": "通用模式,通常调试项目请选择此模式",
+			"cwd": "${workspaceFolder}",
+			"authstr": "KzsYbRZMQr0iBVsrPRLyVnymVuMT5xUm",
+			"luaFileExtension": "",
+			"connectionPort": 102,
+			"pathCaseSensitivity": true,
+			"stopOnEntry": false,
+			"useCHook": true,
+			"autoPathMode": true,
+			"logLevel": 1,
+			"VSCodeAsClient": true,
+			"connectionIP": "testpie.gp.qq.com"
+		},
+		{
+			"type": "LuaHelper-Debug",
+			"request": "launch",
+			"name": "LuaHelper-DebugFile",
+			"description": "独立文件调试模式",
+			"luaPath": "",
+			"packagePath": [],
+			"luaFileExtension": "",
+			"connectionPort": 102,
+			"stopOnEntry": true,
+			"useCHook": false,
+			"logLevel": 1
+		}
+	]
+}

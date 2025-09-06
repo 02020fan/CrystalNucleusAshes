@@ -7,16 +7,18 @@ ProjectShortPath=/CrystalNucleusAshes/
 StartMapName=/CrystalNucleusAshes/UGCmap
 MapMode=0
 bIsBigWorld=0
-Version=1.32.11.31548
-UpdateVersion=7
+Version=1.33.12.32550
+UpdateVersion=9
 GameModePath=/CrystalNucleusAshes/Asset/Blueprint/CNAGameMode.CNAGameMode_C
 DefaultLevelDirectorPath=/Asset/Blueprint/UGCLevelDirector.UGCLevelDirector_C
+DataTableRootDir=
 
 [FeatureFlags]
 bOpenEntityEditor=1
 bOpenItemEditor=1
 bOpenItemEditorV1=0
 bOpenSkillEditorV1=0
+bOpenParticleEditor=1
 
 [MatchSetting]
 NumberOfTeams=1
@@ -70,7 +72,7 @@ LastTargetPlatform=LinuxServer
 [UGCUploadOption]
 PlatformIndex=0
 SkipBake=False
-TargetPlatform=LinuxServer+WindowsNoEditor+Android_ETC2+IOS+OpenHarmony_ETC2
+TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
@@ -139,5 +141,15 @@ RankDensity=100
 BeyondRankTime=10
 BeyondRankNum=10
 TeamScoreCalculation=0
+
+[Input]
+UGCReservedAction_01=
+UGCReservedAction_02=
+UGCReservedAction_03=
+UGCReservedAction_04=
+UGCReservedAction_05=
+UGCReservedAction_06=
+UGCReservedAction_07=
+UGCReservedAction_08=
 
 

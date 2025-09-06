@@ -1,5 +1,8 @@
 ---@class UMG_Lobby_PlayerInfo_C:UUserWidget
+---@field Common_Avatar_BP Common_Avatar_BP_C
 ---@field ProgressBar_Exp UProgressBar
+---@field TextBlock_0 UTextBlock
+---@field TextBlock_1 UTextBlock
 ---@field TextBlock_NowExp UTextBlock
 ---@field TextBlock_PlayerLevel UTextBlock
 ---@field TextBlock_PlayerName UTextBlock

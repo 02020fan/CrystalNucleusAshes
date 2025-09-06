@@ -1,0 +1,144 @@
+--- @class LobbyFlow
+LobbyFlow = {}
+
+
+LobbyFlow.CurrentState="None"
+
+LobbyFlow.WidgetType={
+    Lobby_MainLobby={
+        Name="MainLobby",
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/MainLobby/UMG_Lobby_MainUI.UMG_Lobby_MainUI_C'),
+        Widget=nil,
+    },
+    Lobby_MapSelect={
+        Name="MapSelect",
+        Path='Asset/UI/Lobby/MapSelect/UMG_Lobby_MapSelect.UMG_Lobby_MapSelect_C',
+        Widget=nil,
+    },
+    Lobby_NormalDebris={
+        Name="Normal_Debris",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
+        Widget=nil,
+    },
+    Lobby_RareDebris={
+        Name="Rare_Debris",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
+        Widget=nil,
+    },
+    Lobby_SuperRareDebris={
+        Name="SuperRare_Debris",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
+        Widget=nil,
+    },
+    Lobby_Feats={
+        Name="Feats",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
+        Widget=nil,
+    },
+    Lobby_Equipment={
+        Name="Equipment",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Widget=nil,
+    },
+    Lobby_Weapon={
+        Name="Weapon",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Widget=nil,
+    },
+    Lobby_Amored={
+        Name="Amored",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Widget=nil,
+    },
+    Lobby_Invite={
+        Name="Invite",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C',
+        Widget=nil,
+    },
+    Lobby_Join={
+        Name="Join",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C',
+        Widget=nil,
+    },
+    Lobby_Quit={
+        Name="Quit",
+        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Quit.UMG_Lobby_Quit_C',
+        Widget=nil,
+    },
+}
+function LobbyFlow:Go(WidgetType)
+
+    print("Execute LobbyFlow Go")
+
+    print("LobbyFlow CurrentState"..LobbyFlow.CurrentState)
+
+    if  WidgetType.Name==LobbyFlow.CurrentState  then
+
+        print("Already in "..WidgetType.Name)
+
+        return
+
+    else
+
+        print("Switch to "..WidgetType.Name)
+
+         --隐藏当前界面
+        for _, type in pairs(LobbyFlow.WidgetType) do
+
+            if  type.Name==LobbyFlow.CurrentState then
+
+                if type.Widget then
+
+                    UGCWidgetManagerSystem.HideWidget(type.Widget)
+
+                    print("LobbyHide "..type.Name)
+                end
+                
+            end
+        end
+
+        if WidgetType.Widget then
+
+            WidgetType.Widget:AddToViewport();
+            LobbyFlow.CurrentState=WidgetType.Name
+
+            print("AlreadyShow "..WidgetType.Name)
+
+        else
+            UGCWidgetManagerSystem.CreateWidgetAsync(WidgetType.Path,
+            function(Widget) 
+            if Widget then
+                WidgetType.Widget=Widget
+                Widget:AddToViewport();
+                LobbyFlow.CurrentState=WidgetType.Name
+                print("Create and Show "..WidgetType.Name)
+                print("Create and Show"..LobbyFlow.CurrentState)
+                end
+            end)
+        end
+    end
+end
+
+function LobbyFlow:SwitchToLobbyCamera(PC)
+
+    local Cameras=UGCActorComponentUtility.GetAllActorsOfClass(UGCGameSystem.GameState,UGCObjectUtility.LoadClass(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/Lobby/BP_LobbyCamera.BP_LobbyCamera_C')));
+    for _, Camera in pairs(Cameras) do
+        if Camera  then
+            PC:SetViewTargetWithBlend(Camera);
+            break;
+        end
+    end
+
+end
+
+function LobbyFlow:HideBeginUI()
+
+    local MainControlPanel = UGCWidgetManagerSystem.GetMainUI()
+    UGCWidgetManagerSystem.HideWidget(MainControlPanel.MainControlBaseUI)
+    UGCWidgetManagerSystem.HideWidget(MainControlPanel.ShootingUIPanel)
+    UGCWidgetManagerSystem.SetVirtualJoystickVisibility(false);   --隐藏摇杆
+    UGCWidgetManagerSystem.SetCrosshairVisibility(false)
+
+end
+
+return LobbyFlow
