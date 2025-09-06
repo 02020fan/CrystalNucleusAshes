@@ -99,7 +99,7 @@ function LobbyFlow:Go(WidgetType)
 
         if WidgetType.Widget then
 
-            WidgetType.Widget:AddToViewport();
+            UGCWidgetManagerSystem.ShowWidget(WidgetType.Widget)
             LobbyFlow.CurrentState=WidgetType.Name
 
             print("AlreadyShow "..WidgetType.Name)

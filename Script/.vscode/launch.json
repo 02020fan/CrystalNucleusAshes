@@ -8,7 +8,7 @@
 			"program": "",
 			"description": "通用模式,通常调试项目请选择此模式",
 			"cwd": "${workspaceFolder}",
-			"authstr": "KzsYbRZMQr0iBVsrPRLyVnymVuMT5xUm",
+			"authstr": "faluZRIfa7FcKCsTkqWyt7ropTc5gGdN",
 			"luaFileExtension": "",
 			"connectionPort": 102,
 			"pathCaseSensitivity": true,
