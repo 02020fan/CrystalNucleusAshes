@@ -7,7 +7,7 @@ ProjectShortPath=/CrystalNucleusAshes/
 StartMapName=/CrystalNucleusAshes/UGCmap
 MapMode=0
 bIsBigWorld=0
-Version=1.33.12.32550
+Version=1.33.12.32552
 UpdateVersion=9
 GameModePath=/CrystalNucleusAshes/Asset/Blueprint/CNAGameMode.CNAGameMode_C
 DefaultLevelDirectorPath=/Asset/Blueprint/UGCLevelDirector.UGCLevelDirector_C
@@ -77,6 +77,9 @@ TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 [DebugSettings]
 bRoomOB=0
 TeamPlayers=1,0;
+bDebugLua=0
+bWaitIDE=0
+bAutoPIEAttachIDE=0
 
 [MultiModeSetting_0]
 bDefaultMode=1
