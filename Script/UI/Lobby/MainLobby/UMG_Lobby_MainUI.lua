@@ -19,12 +19,30 @@
 ---@field Weapon UMG_Lobby_Equipment_C
 ---@field WidgetSwitcher_0 UWidgetSwitcher
 --Edit Below--
-local UMG_Lobby_MainUI = { bInitDoOnce = false } 
---[==[ Construct
+
+local UMG_Lobby_MainUI = {} 
+
 function UMG_Lobby_MainUI:Construct()
-	
+	self.Equipment.FightShop.OnClicked:Add(self.EquipmentFightShop,self)
+    self.Weapon.FightShop.OnClicked:Add(self.WeaponFightShop,self)
+    self.Amored.FightShop.OnClicked:Add(self.AmoredFightShop,self)
 end
--- Construct ]==]
+
+function UMG_Lobby_MainUI:EquipmentFightShop()
+    print("Clicked FightShop")
+    LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_Equipment)
+end
+
+function UMG_Lobby_MainUI:AmoredFightShop()
+    print("Clicked FightShop")
+    LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_Amored)
+end
+
+function UMG_Lobby_MainUI:WeaponFightShop()
+    print("Clicked FightShop")
+
+    LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_Weapon)
+end
 -- function UMG_Lobby_MainUI:Tick(MyGeometry, InDeltaTime)
 -- end
 -- function UMG_Lobby_MainUI:Destruct()

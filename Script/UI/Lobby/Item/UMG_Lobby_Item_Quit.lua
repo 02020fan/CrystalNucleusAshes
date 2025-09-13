@@ -1,15 +1,19 @@
 ---@class UMG_Lobby_Item_Quit_C:UUserWidget
----@field Button_0 UButton
 ---@field Image_0 UImage
+---@field ReturnToLobby UButton
 --Edit Below--
-local UMG_Lobby_Item_Quit = { bInitDoOnce = false } 
 
---[==[ Construct
+local UMG_Lobby_Item_Quit = {} 
+
+
 function UMG_Lobby_Item_Quit:Construct()
-	
+	self.ReturnToLobby.OnClicked:Add(self.ReturnToMainLobby,self)
 end
--- Construct ]==]
 
+function UMG_Lobby_Item_Quit:ReturnToMainLobby()
+    print("Clicked ReturnToLobby")
+    LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_MainLobby);
+end
 -- function UMG_Lobby_Item_Quit:Tick(MyGeometry, InDeltaTime)
 
 -- end

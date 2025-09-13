@@ -5,6 +5,7 @@ UGCGameSystem.UGCRequire("Script.UI.Lobby.LobbyScripts.LobbyFlow")
 function CNAPlayerController:ReceiveBeginPlay()
     CNAPlayerController.SuperClass.ReceiveBeginPlay(self)
     self:Init();
+    
 end
 
 function CNAPlayerController:Init()

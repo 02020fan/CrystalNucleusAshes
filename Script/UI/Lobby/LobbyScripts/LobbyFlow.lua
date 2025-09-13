@@ -2,7 +2,7 @@
 LobbyFlow = {}
 
 
-LobbyFlow.CurrentState="None"
+LobbyFlow.CurrentState="None"  --默认状态
 
 LobbyFlow.WidgetType={
     Lobby_MainLobby={
@@ -37,17 +37,17 @@ LobbyFlow.WidgetType={
     },
     Lobby_Equipment={
         Name="Equipment",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Equipment/UMG_Lobby_MainEquipment.UMG_Lobby_MainEquipment_C'),
         Widget=nil,
     },
     Lobby_Weapon={
         Name="Weapon",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Weapon/UMG_Lobby_MainWeapon.UMG_Lobby_MainWeapon_C'),
         Widget=nil,
     },
     Lobby_Amored={
         Name="Amored",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Equipment.UMG_Lobby_Equipment_C',
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Amored/UMG_Lobby_MainAmored.UMG_Lobby_MainAmored_C'),
         Widget=nil,
     },
     Lobby_Invite={
@@ -67,8 +67,6 @@ LobbyFlow.WidgetType={
     },
 }
 function LobbyFlow:Go(WidgetType)
-
-    print("Execute LobbyFlow Go")
 
     print("LobbyFlow CurrentState"..LobbyFlow.CurrentState)
 

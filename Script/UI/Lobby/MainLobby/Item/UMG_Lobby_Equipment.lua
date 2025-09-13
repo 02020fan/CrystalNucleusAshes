@@ -1,5 +1,5 @@
 ---@class UMG_Lobby_Equipment_C:UUserWidget
----@field Button_1 UButton
+---@field FightShop UButton
 ---@field Shopname UTextBlock
 ---@field TextContent FText
 --Edit Below--
