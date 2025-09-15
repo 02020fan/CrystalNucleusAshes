@@ -2,6 +2,7 @@
 ---@field Cuirass UMG_Lobby_AmoredCat_C
 ---@field Cuis UMG_Lobby_AmoredCat_C
 ---@field Helmet UMG_Lobby_AmoredCat_C
+---@field Image_0 UImage
 ---@field UGC_ReuseList2 UGC_ReuseList2_C
 ---@field UMG_Lobby_Coin UMG_Lobby_Coin_C
 ---@field UMG_Lobby_Item_Quit UMG_Lobby_Item_Quit_C

@@ -1,16 +1,17 @@
 ---@class UMG_Lobby_StartGame_C:UUserWidget
+---@field Content UTextBlock
 ---@field Image_0 UImage
 ---@field MainButton UButton
----@field 开始游戏 UTextBlock
 ---@field TextContent FText
 --Edit Below--
 local UMG_Lobby_StartGame = { bInitDoOnce = false } 
 
---[==[ Construct
+
 function UMG_Lobby_StartGame:Construct()
 	
+    self.Content:SetText(self.TextContent);
 end
--- Construct ]==]
+
 
 -- function UMG_Lobby_StartGame:Tick(MyGeometry, InDeltaTime)
 

@@ -1,12 +1,15 @@
 ---@class UMG_Lobby_Item_TopText_C:UUserWidget
+---@field Content UTextBlock
+---@field TextContent FText
 --Edit Below--
 local UMG_Lobby_Item_TopText = { bInitDoOnce = false } 
 
---[==[ Construct
+
 function UMG_Lobby_Item_TopText:Construct()
 	
+    self.Content:SetText(self.TextContent);
 end
--- Construct ]==]
+
 
 -- function UMG_Lobby_Item_TopText:Tick(MyGeometry, InDeltaTime)
 
