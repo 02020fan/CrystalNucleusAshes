@@ -15,26 +15,6 @@ LobbyFlow.WidgetType={
         Path='Asset/UI/Lobby/MapSelect/UMG_Lobby_MapSelect.UMG_Lobby_MapSelect_C',
         Widget=nil,
     },
-    Lobby_NormalDebris={
-        Name="Normal_Debris",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
-        Widget=nil,
-    },
-    Lobby_RareDebris={
-        Name="Rare_Debris",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
-        Widget=nil,
-    },
-    Lobby_SuperRareDebris={
-        Name="SuperRare_Debris",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
-        Widget=nil,
-    },
-    Lobby_Feats={
-        Name="Feats",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Coin.UMG_Lobby_Coin_C',
-        Widget=nil,
-    },
     Lobby_Equipment={
         Name="Equipment",
         Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Equipment/UMG_Lobby_MainEquipment.UMG_Lobby_MainEquipment_C'),
@@ -50,19 +30,19 @@ LobbyFlow.WidgetType={
         Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Amored/UMG_Lobby_MainAmored.UMG_Lobby_MainAmored_C'),
         Widget=nil,
     },
-    Lobby_Invite={
+    Lobby_InviteJoin={
         Name="Invite",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C',
-        Widget=nil,
-    },
-    Lobby_Join={
-        Name="Join",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C',
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/InviteJoin/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C'),
         Widget=nil,
     },
     Lobby_Quit={
         Name="Quit",
         Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Quit.UMG_Lobby_Quit_C',
+        Widget=nil,
+    },
+    Lobby_Shop={
+        Name="Shop",
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/Shop/Mainshop/UMG_Lobby_MainShop.UMG_Lobby_MainShop_C'),
         Widget=nil,
     },
 }

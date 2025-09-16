@@ -1,4 +1,4 @@
----@class UMG_Lobby_Item_Select_C:UUserWidget
+---@class UMG_Lobby_Item_SelectVer_C:UUserWidget
 ---@field SelectButton UButton
 ---@field Text UTextBlock
 ---@field TextContent FText

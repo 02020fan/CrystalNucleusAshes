@@ -1,6 +1,5 @@
 ---@class UMG_Lobby_StartGame_C:UUserWidget
 ---@field Content UTextBlock
----@field Image_0 UImage
 ---@field MainButton UButton
 ---@field TextContent FText
 --Edit Below--
