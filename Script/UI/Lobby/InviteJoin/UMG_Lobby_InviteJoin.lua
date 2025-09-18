@@ -1,8 +1,6 @@
 ---@class UMG_Lobby_InviteJoin_C:UUserWidget
 ---@field Button_0 UButton
----@field Button_1 UButton
----@field CustomizeMultiLineEditableTextBox_0 UCustomizeMultiLineEditableTextBox
----@field UMG_Lobby_Item_Quit UMG_Lobby_Item_Quit_C
+---@field Image_0 UImage
 --Edit Below--
 local UMG_Lobby_InviteJoin = { bInitDoOnce = false } 
 

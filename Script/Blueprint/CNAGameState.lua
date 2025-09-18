@@ -3,11 +3,15 @@
 UGCGameSystem.UGCRequire('Script.Common.ue_enum_custom');
 require("Script.UGCEventSystem");
 require("Script.CNAEventDefine");
-require("Script.CNAMode");
-local CNAGameState = {}; 
--- function CNAGameState:ReceiveBeginPlay()
+require("Script.CNAGameData");
 
--- end
+local CNAGameState = {}; 
+
+
+function CNAGameState:ReceiveBeginPlay()
+
+end
+
 -- function CNAGameState:ReceiveTick(DeltaTime)
 
 -- end

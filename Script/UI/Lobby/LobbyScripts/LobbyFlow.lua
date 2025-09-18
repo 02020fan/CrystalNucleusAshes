@@ -37,7 +37,7 @@ LobbyFlow.WidgetType={
     },
     Lobby_Quit={
         Name="Quit",
-        Path='Asset/UI/Lobby/LobbyScripts/UMG_Lobby_Quit.UMG_Lobby_Quit_C',
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/MainLobby/UMG_quit.UMG_Quit_C'),
         Widget=nil,
     },
     Lobby_Shop={

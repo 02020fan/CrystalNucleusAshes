@@ -1,3 +1,0 @@
-local CNAMode = {}
-
-return CNAMode

@@ -1,3 +1,3 @@
-local CNAEventDefine = {}
+CNAEventDefine = CNAEventDefine or {}
 
-return CNAEventDefine
+CNAEventDefine.UpdateLevelExp=                   101;

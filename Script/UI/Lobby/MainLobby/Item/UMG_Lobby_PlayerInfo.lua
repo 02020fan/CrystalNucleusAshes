@@ -27,13 +27,55 @@ function UMG_Lobby_PlayerInfo:Construct()
 
         self.Common_Avatar_BP:InitView(1,UGCGameSystem.GetUIDByPlayerState(PS),PS.IconURL,PS.PlatformGender,PS.SegmentLevel,PS.PlayerLevel,true,true);
 
-        print("PS.Gender"..PS.PlatformGender);
-
         self.PlayerName:SetText(PS.PlayerName or "nil");
         
         self.UID:SetText((UGCGameSystem.GetUIDByPlayerState(PS) or "nil"));
 
+        local Level,Exp=PS:GetLevelEXP();
+
+        self.TextBlock_NowExp:SetText(tostring(Exp));
+
+        self.PlayerLevel:SetText("LV."..tostring(Level));
+
+        self.TextBlock_TargetExp:SetText(tostring(CNAGameData.EXP[Level] or "nil"));
+
+        self.ProgressBar_Exp:SetPercent(Exp/(CNAGameData.EXP[Level] or 1));
+
+        if PS.PlatformGender==0 then
+
+            self.Gendar:SetVisibility(ESlateVisibility.Collapsed);
+
+        elseif PS.PlatformGender==1 then
+
+            self.Gendar:SetActiveWidgetIndex(0);
+
+        elseif PS.PlatformGender==2 then
+
+            self.Gendar:SetActiveWidgetIndex(1);
+
+        else
+
+            self.Gendar:SetVisibility(ESlateVisibility.Collapsed);
+
+        end
+        
     end
+end
+
+function UMG_Lobby_PlayerInfo:LocalAddListender()
+
+    UGCEventSystem.AddEventListener(CNAEventDefine.UpdateLevelExp,self.UpdateExperience,self);
+end
+
+function UMG_Lobby_PlayerInfo:UpdateExperience(Exp,Level)
+
+    self.TextBlock_NowExp:SetText(tostring(Exp));
+
+    self.PlayerLevel:SetText("LV."..tostring(Level));
+
+    self.TextBlock_TargetExp:SetText(tostring(CNAGameData.EXP[Level] or "nil"));
+
+    self.ProgressBar_Exp:SetPercent(Exp/(CNAGameData.EXP[Level] or 1));
 
 end
 
@@ -44,26 +86,6 @@ end
 
 -- function UMG_Lobby_PlayerInfo:Destruct()
 
--- end
-
--- function UMG_Lobby_PlayerInfo:OnUpdate(Data)
-    
---     self.Data = Data
-
---     ---@type FPlayerAccountInfo
---     local PlayerAccountInfo = self.Data.PlayerAccountInfo
-
---     self.TextBlock_PlayerName:SetText(PlayerAccountInfo.PlayerName or "nil")
---     self.TextBlock_PlayerLevel:SetText("Lv. " .. self.Data.Level or 0)
-
---     self.TextBlock_NowExp:SetText(tostring(self.Data.NowExp or 2))
---     self.TextBlock_TargetExp:SetText(tostring(self.Data.TargetExp or 10))
---     self.ProgressBar_Exp:SetPercent(self.Data.ExpRatio or 0.2)
-
---     -- 刷新头像
---     self.Common_Avatar_BP:InitView(1, PlayerAccountInfo.UID, PlayerAccountInfo.IconURL, PlayerAccountInfo.Gender,
---             PlayerAccountInfo.SegmentLevel, PlayerAccountInfo.PlayerLevel, true, true)
-            
 -- end
 
 return UMG_Lobby_PlayerInfo

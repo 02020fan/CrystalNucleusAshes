@@ -7,8 +7,7 @@
 ---@field IfAddOtherPlayers UMG_Lobby_IfAddOtherPlayers_C
 ---@field Image_1 UImage
 ---@field Image_2 UImage
----@field Invite UMG_Lobby_InviteJoin_C
----@field Join UMG_Lobby_InviteJoin_C
+---@field InviteJoin UMG_Lobby_InviteJoin_C
 ---@field ModeSelect UMG_Lobby_ModeSelect_C
 ---@field Player01 UMG_GamePlayer_C
 ---@field Player02 UMG_GamePlayer_C
@@ -18,7 +17,6 @@
 ---@field PlayerNum UTextBlock
 ---@field Quit UMG_Lobby_Quit_C
 ---@field ReadyGame UMG_Lobby_StartGame_C
----@field RoomState UTextBlock
 ---@field Shop UMG_Lobby_Equipment_C
 ---@field Weapon UMG_Lobby_Equipment_C
 ---@field WidgetSwitcher_0 UWidgetSwitcher
