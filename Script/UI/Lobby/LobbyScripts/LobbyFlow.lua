@@ -31,13 +31,13 @@ LobbyFlow.WidgetType={
         Widget=nil,
     },
     Lobby_InviteJoin={
-        Name="Invite",
-        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/InviteJoin/UMG_Lobby_InviteJoin.UMG_Lobby_InviteJoin_C'),
+        Name="InviteJoin",
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/InviteJoin/UMG_Lobby_MainInviteJoin.UMG_Lobby_MainInviteJoin_C'),
         Widget=nil,
     },
     Lobby_Quit={
         Name="Quit",
-        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/MainLobby/UMG_quit.UMG_Quit_C'),
+        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/MainLobby/UMG_Lobby_Quit.UMG_Lobby_Quit_C'),
         Widget=nil,
     },
     Lobby_Shop={
@@ -83,6 +83,9 @@ function LobbyFlow:Go(WidgetType)
             print("AlreadyShow "..WidgetType.Name)
 
         else
+
+            if WidgetType.Path then
+
             UGCWidgetManagerSystem.CreateWidgetAsync(WidgetType.Path,
             function(Widget) 
             if Widget then
@@ -93,6 +96,11 @@ function LobbyFlow:Go(WidgetType)
                 print("Create and Show"..LobbyFlow.CurrentState)
                 end
             end)
+
+            else
+                print("Widget Path is nil"..WidgetType.Name)
+            end
+            
         end
     end
 end
@@ -116,6 +124,26 @@ function LobbyFlow:HideBeginUI()
     UGCWidgetManagerSystem.HideWidget(MainControlPanel.ShootingUIPanel)
     UGCWidgetManagerSystem.SetVirtualJoystickVisibility(false);   --隐藏摇杆
     UGCWidgetManagerSystem.SetCrosshairVisibility(false)
+
+end
+
+function LobbyFlow:UpdateRoomNums(Nums)
+
+    if self.WidgetType.Lobby_MainLobby.Widget then
+
+      self.WidgetType.Lobby_MainLobby.Widget:UpdatePlayerNum(Nums)
+        
+    end
+
+end
+
+function LobbyFlow:UpdatePlayers()
+
+    if self.WidgetType.Lobby_MainLobby.Widget then
+
+        self.WidgetType.Lobby_MainLobby.Widget:OnPlayerEnter()
+        
+    end
 
 end
 

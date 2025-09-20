@@ -1,10 +1,11 @@
 local CNAPlayerPawn = {}
  
---[[
+
 function CNAPlayerPawn:ReceiveBeginPlay()
+
     CNAPlayerPawn.SuperClass.ReceiveBeginPlay(self)
+
 end
---]]
 
 --[[
 function CNAPlayerPawn:ReceiveTick(DeltaTime)

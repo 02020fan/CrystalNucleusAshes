@@ -4,7 +4,7 @@ ProjectDescription=CrystalNucleusAshes
 ProjectName=CrystalNucleusAshes
 ProjectTrueName=3A114D121A1C84F7E3525E8E3A69AB1B868291AD7E3CE436638D10EF412D6E4EEBBD6142308FEC0A299E4E76504A8F8F
 ProjectShortPath=/CrystalNucleusAshes/
-StartMapName=/CrystalNucleusAshes/Maps/Test
+StartMapName=/CrystalNucleusAshes/UGCmap
 MapMode=0
 bIsBigWorld=0
 Version=1.33.12.32554
@@ -76,7 +76,7 @@ TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
-TeamPlayers=1,0;
+TeamPlayers=4,0;
 bDebugLua=0
 bWaitIDE=0
 bAutoPIEAttachIDE=0

@@ -69,6 +69,42 @@ function CNAPlayerState:GetLevelEXP()
     return PlayerLevel,CurrentExperience;
 end
 
+function CNAPlayerState:GetLevel()
+    local PlayerLevel=1;
+
+    local CurrentExperience=self.AllExperience;
+
+    print("CNAPlayerState:OnRep_AllExperience",self.AllExperience);
+
+    for i = 1,CNAGameData.MaxLevel, 1 do
+
+        if CurrentExperience >= CNAGameData.EXP[i] then
+
+            CurrentExperience=CurrentExperience-CNAGameData.EXP[i];
+
+            PlayerLevel=PlayerLevel+1;
+
+        else
+            break;
+        end
+
+    end
+
+    if CurrentExperience>CNAGameData.EXP[CNAGameData.MaxLevel] then
+
+        CurrentExperience=CNAGameData.EXP[CNAGameData.MaxLevel];
+
+        PlayerLevel=CNAGameData.MaxLevel;
+
+    end
+
+    print("CNAPlayerState:OnRep_AllExperience",CurrentExperience);
+
+    print("CNAPlayerState:OnRep_AllExperience PlayerLevel",PlayerLevel);
+
+    return PlayerLevel;
+    
+end
 --[[
 function CNAPlayerState:ReceiveTick(DeltaTime)
     CNAPlayerState.SuperClass.ReceiveTick(self, DeltaTime)

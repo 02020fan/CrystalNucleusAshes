@@ -9,9 +9,7 @@ function UMG_Lobby_Quit:Construct()
 end
 
 function UMG_Lobby_Quit:GoToQuit()
-
     LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_Quit);
-
 end
 
 -- function UMG_Lobby_Quit:Tick(MyGeometry, InDeltaTime)

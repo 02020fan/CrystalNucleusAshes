@@ -1,4 +1,5 @@
 ---@class UMG_Lobby_MainInviteJoin_C:UUserWidget
+---@field UMG_Lobby_Item_Quit UMG_Lobby_Item_Quit_C
 --Edit Below--
 local UMG_Lobby_MainInviteJoin = { bInitDoOnce = false } 
 

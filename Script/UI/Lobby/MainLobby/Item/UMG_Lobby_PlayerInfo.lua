@@ -65,6 +65,7 @@ end
 function UMG_Lobby_PlayerInfo:LocalAddListender()
 
     UGCEventSystem.AddEventListener(CNAEventDefine.UpdateLevelExp,self.UpdateExperience,self);
+    
 end
 
 function UMG_Lobby_PlayerInfo:UpdateExperience(Exp,Level)

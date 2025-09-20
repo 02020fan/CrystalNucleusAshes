@@ -2,10 +2,13 @@ local CNAPlayerController = {}
  
 UGCGameSystem.UGCRequire("Script.UI.Lobby.LobbyScripts.LobbyFlow")
 
+CNAPlayerController.PlayerNums=0;
+
 function CNAPlayerController:ReceiveBeginPlay()
     CNAPlayerController.SuperClass.ReceiveBeginPlay(self)
     self:Init();
-    
+
+    UGCGenericMessageSystem.ListenGlobalMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerEnter, self, self.InitOnPlayerEnter);
 end
 
 function CNAPlayerController:Init()
@@ -25,6 +28,18 @@ function CNAPlayerController:LobbyUIInit()
     
 end
 
+function CNAPlayerController:InitOnPlayerEnter(PlayerKeys)
+
+    self.PlayerNums=UGCGameSystem.GetPlayerNum(true)
+
+    if self:HasAuthority()==false then
+        
+        LobbyFlow:UpdatePlayers();
+        
+    end
+
+end
+
 --[[
 function CNAPlayerController:ReceiveTick(DeltaTime)
     CNAPlayerController.SuperClass.ReceiveTick(self, DeltaTime)
@@ -37,11 +52,16 @@ function CNAPlayerController:ReceiveEndPlay()
 end
 --]]
 
---[[
+
 function CNAPlayerController:GetReplicatedProperties()
-    return
+    return"PlayerNums";
 end
---]]
+
+function CNAPlayerController:OnRep_PlayerNums()
+
+    LobbyFlow:UpdateRoomNums(self.PlayerNums);
+
+end
 
 --[[
 function CNAPlayerController:GetAvailableServerRPCs()

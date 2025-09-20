@@ -4,12 +4,16 @@
 --Edit Below--
 local UMG_Lobby_InviteJoin = { bInitDoOnce = false } 
 
---[==[ Construct
-function UMG_Lobby_InviteJoin:Construct()
-	
-end
--- Construct ]==]
 
+function UMG_Lobby_InviteJoin:Construct()
+    self.Button_0.OnClicked:Add(self.OnClickInviteJoin,self)
+end
+
+function UMG_Lobby_InviteJoin:OnClickInviteJoin()
+
+    LobbyFlow:Go(LobbyFlow.WidgetType.Lobby_InviteJoin);
+    
+end
 -- function UMG_Lobby_InviteJoin:Tick(MyGeometry, InDeltaTime)
 
 -- end
