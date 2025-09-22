@@ -4,10 +4,8 @@
 ---@field PlayerLevel UTextBlock
 ---@field PlayerName UTextBlock
 ---@field ProgressBar_Exp UProgressBar
----@field TextBlock_0 UTextBlock
 ---@field TextBlock_NowExp UTextBlock
 ---@field TextBlock_TargetExp UTextBlock
----@field UID UTextBlock
 --Edit Below--
 local UMG_Lobby_PlayerInfo = {} 
 
@@ -29,8 +27,6 @@ function UMG_Lobby_PlayerInfo:Construct()
 
         self.PlayerName:SetText(PS.PlayerName or "nil");
         
-        self.UID:SetText((UGCGameSystem.GetUIDByPlayerState(PS) or "nil"));
-
         local Level,Exp=PS:GetLevelEXP();
 
         self.TextBlock_NowExp:SetText(tostring(Exp));

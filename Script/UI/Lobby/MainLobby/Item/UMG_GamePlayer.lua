@@ -31,7 +31,7 @@ function UMG_GamePlayer:GetPlayerName()
   if self.LocalPlayerName then
 
     return self.LocalPlayerName
-
+    
   end
 
 end

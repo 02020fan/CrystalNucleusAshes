@@ -3,11 +3,10 @@
 ---@field BeginGame UMG_Lobby_StartGame_C
 ---@field CancleMatch UMG_Lobby_StartGame_C
 ---@field CancleReady UMG_Lobby_StartGame_C
+---@field CanvasPanel_0 UCanvasPanel
 ---@field Equipment UMG_Lobby_Equipment_C
 ---@field IfAddOtherPlayers UMG_Lobby_IfAddOtherPlayers_C
 ---@field Image_1 UImage
----@field Image_2 UImage
----@field InviteJoin UMG_Lobby_InviteJoin_C
 ---@field ModeSelect UMG_Lobby_ModeSelect_C
 ---@field PlayerInfo UMG_Lobby_PlayerInfo_C
 ---@field PlayerNum UTextBlock
@@ -24,6 +23,7 @@ UMG_Lobby_MainUI.PlayersWidget={}
 
 function UMG_Lobby_MainUI:Construct()
 
+    UICommonFunctionLibrary.SetAdaptation(self.CanvasPanel_0, self);
 	self.Equipment.FightShop.OnClicked:Add(self.EquipmentFightShop,self)
     self.Weapon.FightShop.OnClicked:Add(self.WeaponFightShop,self)
     -- self.Amored.FightShop.OnClicked:Add(self.AmoredFightShop,self)

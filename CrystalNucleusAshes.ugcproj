@@ -7,7 +7,7 @@ ProjectShortPath=/CrystalNucleusAshes/
 StartMapName=/CrystalNucleusAshes/UGCmap
 MapMode=0
 bIsBigWorld=0
-Version=1.33.12.32554
+Version=1.33.12.32556
 UpdateVersion=9
 GameModePath=/CrystalNucleusAshes/Asset/Blueprint/CNAGameMode.CNAGameMode_C
 DefaultLevelDirectorPath=/Asset/Blueprint/UGCLevelDirector.UGCLevelDirector_C
@@ -19,6 +19,7 @@ bOpenItemEditor=1
 bOpenItemEditorV1=0
 bOpenSkillEditorV1=0
 bOpenParticleEditor=1
+bOpenParticleEditorV1=0
 
 [MatchSetting]
 NumberOfTeams=1
@@ -71,7 +72,7 @@ LastTargetPlatform=LinuxServer
 
 [UGCUploadOption]
 PlatformIndex=0
-SkipBake=False
+SkipBake=True
 TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
@@ -89,8 +90,8 @@ ModeImage=/Game/Arts/UI/WristBand/0.0
 ModeUnlockConditionDescription=
 NumberOfTeams=1
 TeamPlayers=1
-bIsAllowStageMatching=0
-TeamSettings="{\"TeamSettings\": []}"
+bIsAllowStageMatching=1
+TeamSettings="{\"TeamSettings\": [{\"NumberOfTeams\": 1,\"TeamPlayers\": 4},{\"NumberOfTeams\": 1,\"TeamPlayers\": 3},{\"NumberOfTeams\": 1,\"TeamPlayers\": 2},{\"NumberOfTeams\": 1,\"TeamPlayers\": 1}]}"
 bEnableChat=0
 bEnableRoomChat=0
 ChannelName=全部
