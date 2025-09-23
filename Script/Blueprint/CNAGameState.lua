@@ -7,28 +7,16 @@ require("Script.CNAGameData");
 
 local CNAGameState = {}; 
 
-CNAGameState.PlayerNums=0;
-
+CNAGameState.IsInLobby=true;
 
 function CNAGameState:ReceiveBeginPlay()
 
-    -- UGCGenericMessageSystem.ListenGlobalMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerEnter, self, self.UpdatePlayerNums);
-
 end
 
-function CNAGameState:UpdatePlayerNums(PlayerKey)
 
-    self.PlayerNums=UGCGameSystem.GetPlayerNum(true)
+-- function CNAGameState:GetReplicatedProperties()
+--     return "PlayerNums";
+-- end
 
-end
 
-function CNAGameState:GetReplicatedProperties()
-    return "PlayerNums";
-end
-
-function CNAGameState:OnRep_PlayerNums()
-
-    LobbyFlow:UpdateRoomNums(self.PlayerNums);
-
-end
 return CNAGameState;

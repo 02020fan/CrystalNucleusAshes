@@ -48,7 +48,7 @@ BeyondRankTime=10
 BeyondRankNum=10
 TeamScoreCalculation=0
 bUseMultiModeMatchSetting=1
-MultiModeSettingNum=2
+MultiModeSettingNum=3
 
 [MiniMap]
 ZoomRatios=100
@@ -77,7 +77,7 @@ TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
-TeamPlayers=4,0;
+TeamPlayers=2,0;
 bDebugLua=0
 bWaitIDE=0
 bAutoPIEAttachIDE=0
@@ -122,8 +122,8 @@ ModeImage=/Game/UMG/Texture/Lobby_NoAtlas/Supply/008_08_2_Yundonghui_BoxStyle.00
 ModeUnlockConditionDescription=
 NumberOfTeams=1
 TeamPlayers=4
-bIsAllowStageMatching=0
-TeamSettings="{\"TeamSettings\": [{\"NumberOfTeams\": 1,\"TeamPlayers\": 1}]}"
+bIsAllowStageMatching=1
+TeamSettings="{\"TeamSettings\": [{\"NumberOfTeams\": 1,\"TeamPlayers\": 4},{\"NumberOfTeams\": 1,\"TeamPlayers\": 3},{\"NumberOfTeams\": 1,\"TeamPlayers\": 2},{\"NumberOfTeams\": 1,\"TeamPlayers\": 1}]}"
 bEnableChat=0
 bEnableRoomChat=0
 ChannelName=全部
@@ -155,5 +155,37 @@ UGCReservedAction_05=
 UGCReservedAction_06=
 UGCReservedAction_07=
 UGCReservedAction_08=
+
+[MultiModeSetting_2]
+bDefaultMode=0
+ModeID=1003
+ModeName=
+ModeImage=
+ModeUnlockConditionDescription=
+NumberOfTeams=1
+TeamPlayers=1
+bIsAllowStageMatching=0
+TeamSettings="{\"TeamSettings\": []}"
+bEnableChat=0
+bEnableRoomChat=0
+ChannelName=全部
+RoomName=全部
+bEnablePrivateChat=0
+bEnableTeamChat=0
+bShowMessage=0
+bMessageDisappear=0
+MessageLifetime=0.0
+MaxMessageLines=6
+bEnableSystemChannel=0
+bEnableChatBubble=0
+BubbleLifetime=10
+MatchMethod=1
+InitialScore=2000
+MinScore=0
+MaxScore=4000
+RankDensity=100
+BeyondRankTime=10
+BeyondRankNum=10
+TeamScoreCalculation=0
 
 

@@ -1,6 +1,6 @@
 --- @class LobbyFlow
 LobbyFlow = {}
-
+local PromiseFuture = require("common.PromiseFuture")
 
 LobbyFlow.CurrentState="None"  --默认状态
 
@@ -30,11 +30,6 @@ LobbyFlow.WidgetType={
         Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/FightEquip/Amored/UMG_Lobby_MainAmored.UMG_Lobby_MainAmored_C'),
         Widget=nil,
     },
-    Lobby_InviteJoin={
-        Name="InviteJoin",
-        Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/InviteJoin/UMG_Lobby_MainInviteJoin.UMG_Lobby_MainInviteJoin_C'),
-        Widget=nil,
-    },
     Lobby_Quit={
         Name="Quit",
         Path=UGCGameSystem.GetUGCResourcesFullPath('Asset/UI/Lobby/MainLobby/UMG_Lobby_Quit.UMG_Lobby_Quit_C'),
@@ -47,45 +42,27 @@ LobbyFlow.WidgetType={
     },
 }
 function LobbyFlow:Go(WidgetType)
-
     print("LobbyFlow CurrentState"..LobbyFlow.CurrentState)
-
     if  WidgetType.Name==LobbyFlow.CurrentState  then
-
         print("Already in "..WidgetType.Name)
-
         return
-
     else
-
         print("Switch to "..WidgetType.Name)
-
          --隐藏当前界面
         for _, type in pairs(LobbyFlow.WidgetType) do
-
             if  type.Name==LobbyFlow.CurrentState then
-
                 if type.Widget then
-
                     UGCWidgetManagerSystem.HideWidget(type.Widget)
-
                     print("LobbyHide "..type.Name)
                 end
-                
             end
         end
-
         if WidgetType.Widget then
-
             UGCWidgetManagerSystem.ShowWidget(WidgetType.Widget)
             LobbyFlow.CurrentState=WidgetType.Name
-
             print("AlreadyShow "..WidgetType.Name)
-
         else
-
             if WidgetType.Path then
-
             UGCWidgetManagerSystem.CreateWidgetAsync(WidgetType.Path,
             function(Widget) 
             if Widget then
@@ -96,17 +73,14 @@ function LobbyFlow:Go(WidgetType)
                 print("Create and Show"..LobbyFlow.CurrentState)
                 end
             end)
-
             else
                 print("Widget Path is nil"..WidgetType.Name)
             end
-            
         end
     end
 end
 
 function LobbyFlow:SwitchToLobbyCamera(PC)
-
     local Cameras=UGCActorComponentUtility.GetAllActorsOfClass(UGCGameSystem.GameState,UGCObjectUtility.LoadClass(UGCGameSystem.GetUGCResourcesFullPath('Asset/Blueprint/Lobby/BP_LobbyCamera.BP_LobbyCamera_C')));
     for _, Camera in pairs(Cameras) do
         if Camera  then
@@ -114,35 +88,52 @@ function LobbyFlow:SwitchToLobbyCamera(PC)
             break;
         end
     end
-
 end
 
 function LobbyFlow:HideBeginUI()
-
     local MainControlPanel = UGCWidgetManagerSystem.GetMainUI()
     UGCWidgetManagerSystem.HideWidget(MainControlPanel.MainControlBaseUI)
     UGCWidgetManagerSystem.HideWidget(MainControlPanel.ShootingUIPanel)
     UGCWidgetManagerSystem.SetVirtualJoystickVisibility(false);   --隐藏摇杆
     UGCWidgetManagerSystem.SetCrosshairVisibility(false)
-
 end
 
-function LobbyFlow:UpdateRoomNums(Nums)
+function LobbyFlow:OnPlayerEnterInLobby()
 
-    if self.WidgetType.Lobby_MainLobby.Widget then
+    print("OnPlayerEnterInLobby Called")
 
-      self.WidgetType.Lobby_MainLobby.Widget:UpdatePlayerNum(Nums)
-        
-    end
+    local PC=UGCGameSystem.GetLocalPlayerController();
 
-end
+    if PC then
 
-function LobbyFlow:UpdatePlayers()
+        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
 
-    if self.WidgetType.Lobby_MainLobby.Widget then
+           LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(#PC.LobbyTeammatePlayerKeys);
 
-        self.WidgetType.Lobby_MainLobby.Widget:OnPlayerEnter()
-        
+        else
+
+           print("Lobby_MainLobby Widget is nil, waiting for it to be created...")
+            PromiseFuture.New():Set(
+                function (PromiseFuture)
+                    while true do
+
+                        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
+
+                          LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(#PC.LobbyTeammatePlayerKeys);
+                          print("Lobby_MainLobby Widget is now available, PlayerNum set.")
+                          return
+                        end
+
+                        PromiseFuture:Yield()
+                    end
+                end
+            ):AutoResume(self,0.2,10)
+        end
+
+       print("Set PlayerNum to "..#PC.LobbyTeammatePlayerKeys)
+
+    else
+        print("PC is nil in OnPlayerEnterInLobby")
     end
 
 end
