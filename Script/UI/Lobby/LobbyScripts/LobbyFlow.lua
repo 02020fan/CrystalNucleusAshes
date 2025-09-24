@@ -98,43 +98,30 @@ function LobbyFlow:HideBeginUI()
     UGCWidgetManagerSystem.SetCrosshairVisibility(false)
 end
 
-function LobbyFlow:OnPlayerEnterInLobby()
+function LobbyFlow:OnPlayerEnterInLobby(Num)
 
-    print("OnPlayerEnterInLobby Called")
+    if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
 
-    local PC=UGCGameSystem.GetLocalPlayerController();
-
-    if PC then
-
-        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
-
-           LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(#PC.LobbyTeammatePlayerKeys);
-
-        else
-
-           print("Lobby_MainLobby Widget is nil, waiting for it to be created...")
-            PromiseFuture.New():Set(
-                function (PromiseFuture)
-                    while true do
-
-                        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
-
-                          LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(#PC.LobbyTeammatePlayerKeys);
-                          print("Lobby_MainLobby Widget is now available, PlayerNum set.")
-                          return
-                        end
-
-                        PromiseFuture:Yield()
-                    end
-                end
-            ):AutoResume(self,0.2,10)
-        end
-
-       print("Set PlayerNum to "..#PC.LobbyTeammatePlayerKeys)
+        LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(Num);
 
     else
-        print("PC is nil in OnPlayerEnterInLobby")
+        PromiseFuture.New():Set(
+                function (PromiseFuture)
+                    while true do
+                        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
+                           LobbyFlow.WidgetType.Lobby_MainLobby.Widget.RoomState.PlayerNum:SetText(#UGCGameSystem.GetLocalPlayerController().LobbyTeammatePlayerKeys);
+                           print("333CNAPlayerController:OnRep_LobbyTeammatePlayerKeys count="..#self.LobbyTeammatePlayerKeys)
+                          return
+                        else
+                        PromiseFuture:Yield()
+                        end
+                    end
+                end):AutoResume(self,0.2,10)
     end
+            
+
+    --    print("Set PlayerNum to "..Num)
+
 
 end
 
