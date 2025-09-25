@@ -10,10 +10,14 @@ function CNAPlayerState:ReceiveBeginPlay()
 end
 
 function CNAPlayerState:SaveInit()
+
     local TheSaveTable=UGCPlayerStateSystem.GetPlayerArchiveData(UGCGameSystem.GetUIDByPlayerState(self))
-    if TheSaveTable.AllExperience then
-        self.AllExperience = TheSaveTable.AllExperience;
+    if TheSaveTable then
+        if TheSaveTable.AllExperience then
+            self.AllExperience = TheSaveTable.AllExperience;
+        end
     end
+
 end
 
 function CNAPlayerState:OnRep_AllExperience()
@@ -95,6 +99,12 @@ function CNAPlayerState:GetReplicatedProperties()
     return "AllExperience",{"bIsLobbyTeamLeader","Lazy"},{"bIsLobbyReady","Lazy"}
 end
 
+function CNAPlayerState:OnRep_bIsLobbyReady()
+    local PC=UGCGameSystem.GetLocalPlayerController();
+    if PC and not PC.bIsTeamLeader then
+        LobbyFlow:SetReadyState(self.bIsLobbyReady);
+    end
+end
 
 --[[
 function CNAPlayerState:GetAvailableServerRPCs()

@@ -30,8 +30,8 @@ end
 
 function CNAPlayerController:ReceiveEndPlay()
     if UGCGameSystem.IsServer() then
-        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerEnter) 
-        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerExit) 
+        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.OnPlayerEnter) 
+        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.OnPlayerExit) 
     end
 end
 
@@ -44,8 +44,14 @@ end
 function CNAPlayerController:OnPlayerEnter(PlayerKey)
 
     local bIsUGCPIE = UGCBlueprintFunctionLibrary.IsUGCPIE(self)
+
     if PlayerKey == UGCGameSystem.GetPlayerKeyByPlayerController(self) then
         self.bIsTeamLeader= bIsUGCPIE and PlayerKey==10001 or UGCTeamSystem.GetIsLeaderOrNotByPlayerKey(PlayerKey)
+
+        UnrealNetwork.RepLazyProperty(self, "bIsTeamLeader")
+        
+        ---如果是队长则默认已准备
+        self:RPC_Server_SetLobbyReadyStatus(self.bIsTeamLeader)
     end
 
     if bIsUGCPIE then
@@ -55,7 +61,6 @@ function CNAPlayerController:OnPlayerEnter(PlayerKey)
     end
 
     UnrealNetwork.RepLazyProperty(self, "LobbyTeammatePlayerKeys")
-
     --给加入游戏的队友同步大厅信息
     if self.bIsTeamLeader then
         if not bIsUGCPIE then
@@ -132,6 +137,10 @@ function CNAPlayerController:GetReplicatedProperties()
     return {"bIsTeamLeader","Lazy"},{"LobbyTeammatePlayerKeys","Lazy"},{"LobbyInfo","Lazy"};
 end
 
+function CNAPlayerController:OnRep_bIsTeamLeader()
+    LobbyFlow:IsTeamLeader()
+end
+
 function CNAPlayerController:OnRep_LobbyInfo()
     
 end
@@ -140,6 +149,8 @@ function CNAPlayerController:OnRep_LobbyTeammatePlayerKeys()
     local Num=#self.LobbyTeammatePlayerKeys;
     print("CNAPlayerController:OnRep_LobbyTeammatePlayerKeys count="..Num)
     LobbyFlow:OnPlayerEnterInLobby(Num);
+
+    LobbyFlow:UpdateLobbyTeammates();
 end
 
 function CNAPlayerController:GetAvailableServerRPCs()
@@ -151,7 +162,7 @@ function CNAPlayerController:RPC_Server_SetLobbyReadyStatus(bIsReady)
     if UGCGameSystem.IsServer() then
         local PS=UGCGameSystem.GetPlayerStateByPlayerController(self);
         if PS then
-            PS:SetLobbyReady(bIsReady);
+            PS.bIsLobbyReady=bIsReady;
         end
     end
     
