@@ -77,7 +77,7 @@ TargetPlatform=LinuxServer+Android_ETC2+IOS+OpenHarmony_ETC2
 
 [DebugSettings]
 bRoomOB=0
-TeamPlayers=2,0;
+TeamPlayers=4,0;
 bDebugLua=0
 bWaitIDE=0
 bAutoPIEAttachIDE=0

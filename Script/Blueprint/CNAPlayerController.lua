@@ -30,8 +30,8 @@ end
 
 function CNAPlayerController:ReceiveEndPlay()
     if UGCGameSystem.IsServer() then
-        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.OnPlayerEnter) 
-        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.OnPlayerExit) 
+        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerEnter) 
+        UGCGenericMessageSystem.UnListenMessage(self, UGCGenericMessageSystem.Messages.UGC.Player.PlayerExit) 
     end
 end
 
@@ -80,14 +80,14 @@ function CNAPlayerController:OnPlayerEnter(PlayerKey)
 end
 
 function CNAPlayerController:OnPlayerExit(PlayerKey)
-    local bIsUGCPIE = UGCBlueprintFunctionLibrary.IsUGCPIE(self)
+    -- local bIsUGCPIE = UGCBlueprintFunctionLibrary.IsUGCPIE(self)
     
-    for Index, TeammatePlayerKey in ipairs(self.LobbyTeammatePlayerKeys) do
-        if TeammatePlayerKey == PlayerKey then
-            self.LobbyInfo.bTeamComplete = false
-            UnrealNetwork.RepLazyProperty(self, "LobbyInfo.bTeamComplete")
-        end
-    end
+    -- for Index, TeammatePlayerKey in ipairs(self.LobbyTeammatePlayerKeys) do
+    --     if TeammatePlayerKey == PlayerKey then
+    --         self.LobbyInfo.bTeamComplete = false
+    --         UnrealNetwork.RepLazyProperty(self, "LobbyInfo.bTeamComplete")
+    --     end
+    -- end
 end
 
 function CNAPlayerController:InitInServerofBattle()
@@ -146,23 +146,30 @@ function CNAPlayerController:OnRep_LobbyInfo()
 end
 
 function CNAPlayerController:OnRep_LobbyTeammatePlayerKeys()
+
     local Num=#self.LobbyTeammatePlayerKeys;
-    print("CNAPlayerController:OnRep_LobbyTeammatePlayerKeys count="..Num)
+
     LobbyFlow:OnPlayerEnterInLobby(Num);
 
     LobbyFlow:UpdateLobbyTeammates();
 end
 
 function CNAPlayerController:GetAvailableServerRPCs()
-    return "RPC_Server_SetLobbyReadyStatus";
+    return 
+    "RPC_Server_SetLobbyReadyStatus";
 end
 
 function CNAPlayerController:RPC_Server_SetLobbyReadyStatus(bIsReady)
 
     if UGCGameSystem.IsServer() then
+
         local PS=UGCGameSystem.GetPlayerStateByPlayerController(self);
+
         if PS then
-            PS.bIsLobbyReady=bIsReady;
+            PS:SetIsLobbyReady(bIsReady);
+            print("CNAPlayerController:RPC_Server_SetLobbyReadyStatus bIsReady="..tostring(bIsReady));
+        else
+            print("CNAPlayerController:RPC_Server_SetLobbyReadyStatus PlayerState is nil");
         end
     end
     

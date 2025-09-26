@@ -116,7 +116,8 @@ function LobbyFlow:OnPlayerEnterInLobby(Num)
                         PromiseFuture:Yield()
                         end
                     end
-                end):AutoResume(self,0.2,10)
+                end
+            ):AutoResume(self,0.2,10)
     end
 end
 
@@ -166,16 +167,16 @@ function LobbyFlow:UpdateLobbyTeammates()
 end
 
 function LobbyFlow:IsTeamLeader()
-
-    local PlayerController=UGCGameSystem.GetLocalPlayerController()
     if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
-        LobbyFlow.WidgetType.Lobby_MainLobby.Widget:InitMatchUI(PlayerController.bIsTeamLeader)
+
+        LobbyFlow.WidgetType.Lobby_MainLobby.Widget:InitMatchUI(UGCGameSystem.GetLocalPlayerController().bIsTeamLeader)
+        
     else
         PromiseFuture.New():Set(
                 function (PromiseFuture)
                     while true do
                         if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
-                           LobbyFlow.WidgetType.Lobby_MainLobby.Widget:InitMatchUI(PlayerController.bIsTeamLeader)
+                           LobbyFlow.WidgetType.Lobby_MainLobby.Widget:InitMatchUI(UGCGameSystem.GetLocalPlayerController().bIsTeamLeader)
                           return
                         else
                         PromiseFuture:Yield()
@@ -186,10 +187,40 @@ function LobbyFlow:IsTeamLeader()
 end
 
 function LobbyFlow:SetReadyState(IsLobbyReady)
-    if IsLobbyReady then
-        LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.CancleReady)
+
+    if UGCGameSystem.GetLocalPlayerController().bIsTeamLeader then
+        print("Is team leader, no need to set ready state.")
+        return
+    end
+
+    if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
+
+        print("Setting ready state to "..tostring(IsLobbyReady))
+        if IsLobbyReady then
+            LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.CancleReady)
+        else
+            LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Ready)
+        end
     else
-        LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Ready)
+        PromiseFuture.New():Set(
+                function (PromiseFuture)
+                    while true do
+                        if UGCGameSystem.GetLocalPlayerController().bIsTeamLeader then
+                            return
+                        end
+                        
+                        if LobbyFlow.WidgetType.Lobby_MainLobby.Widget then
+                            if IsLobbyReady then
+                                LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.CancleReady)
+                            else
+                                LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Match:SetActiveWidget(LobbyFlow.WidgetType.Lobby_MainLobby.Widget.Ready)
+                            end
+                        return
+                        else
+                        PromiseFuture:Yield()
+                        end
+                    end
+                end):AutoResume(self,0.2,5)
     end
 end
 

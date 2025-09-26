@@ -7,6 +7,7 @@ CNAPlayerState.bIsLobbyTeamLeader = false; -- boolean
 function CNAPlayerState:ReceiveBeginPlay()
     CNAPlayerState.SuperClass.ReceiveBeginPlay(self)
     self:SaveInit()
+    -- UnrealNetwork.RepLazyProperty(self,"bIsLobbyReady")
 end
 
 function CNAPlayerState:SaveInit()
@@ -23,7 +24,7 @@ end
 function CNAPlayerState:OnRep_AllExperience()
     local Level,Exp=self:GetLevelEXP();
     print("CNAPlayerState:OnRep_AllExperience PlayerLevel",Level);
-    UGCEventSystem.SendEvent(CNAEventDefine.UpdateLevelExp,Exp,Level);
+    UGCEventSystem:SendEvent(CNAEventDefine.UpdateLevelExp,Exp,Level);
 end
 
 function CNAPlayerState:GetLevelEXP()
@@ -80,7 +81,7 @@ function CNAPlayerState:SetIsLobbyReady(bIsReady)
     end
     self.bIsLobbyReady=bIsReady
     UnrealNetwork.RepLazyProperty(self,"bIsLobbyReady")
-    
+    print("CNAPlayerState:SetIsLobbyReady bIsReady="..tostring(bIsReady));
 end
 --[[
 function CNAPlayerState:ReceiveTick(DeltaTime)
@@ -100,9 +101,18 @@ function CNAPlayerState:GetReplicatedProperties()
 end
 
 function CNAPlayerState:OnRep_bIsLobbyReady()
+
     local PC=UGCGameSystem.GetLocalPlayerController();
+
     if PC and not PC.bIsTeamLeader then
-        LobbyFlow:SetReadyState(self.bIsLobbyReady);
+        
+        if UGCGameSystem.GetPlayerKeyByPlayerController(PC)==UGCGameSystem.GetPlayerKeyByPlayerState(self) then
+
+            LobbyFlow:SetReadyState(self.bIsLobbyReady);
+            print("CNAPlayerState:OnRep_bIsLobbyReady Local Player");
+        else
+            -- print("CNAPlayerState:OnRep_bIsLobbyReady Other Player",self.bIsLobbyReady);
+        end
     end
 end
 

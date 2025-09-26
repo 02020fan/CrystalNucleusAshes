@@ -21,10 +21,8 @@ local PromiseFuture = require("common.PromiseFuture")
 local UMG_Lobby_MainUI = {} 
 function UMG_Lobby_MainUI:Construct()
     
-    -- UICommonFunctionLibrary.SetAdaptation(self.CanvasPanel_0, self);
 	self.Equipment.FightShop.OnClicked:Add(self.EquipmentFightShop,self)
     self.Weapon.FightShop.OnClicked:Add(self.WeaponFightShop,self)
-    -- self.Amored.FightShop.OnClicked:Add(self.AmoredFightShop,self)
     self.Shop.FightShop.OnClicked:Add(self.ShopFightShop,self)
     self.Begin.MainButton.OnClicked:Add(self.BeginMatch,self)
     self.Ready.MainButton.OnClicked:Add(self.ReadyMatch,self)
@@ -34,19 +32,32 @@ function UMG_Lobby_MainUI:Construct()
 end
 
 function UMG_Lobby_MainUI:FunCancleReady()
-    
+    UnrealNetwork.CallUnrealRPC(UGCGameSystem.GetLocalPlayerController(),UGCGameSystem.GetLocalPlayerController(), "RPC_Server_SetLobbyReadyStatus", false)
 end
 
 function UMG_Lobby_MainUI:ReadyMatch()
-
+    print("Player is ready.")
+    -- ugcprint("Player is ready.")
+    UnrealNetwork.CallUnrealRPC(UGCGameSystem.GetLocalPlayerController(),UGCGameSystem.GetLocalPlayerController(), "RPC_Server_SetLobbyReadyStatus", true)
 end
 
 function UMG_Lobby_MainUI:FunCancleMatch()
-
+    UGCMultiMode.RequestCancelMatch()
 end
 
 function UMG_Lobby_MainUI:BeginMatch()
-    
+    local bIsReady=true
+
+    for _, PS in pairs(UGCGameSystem.GetAllPlayerState(false)) do
+        bIsReady = bIsReady and PS.bIsLobbyReady
+    end
+
+    if bIsReady then
+        UGCMultiMode.RequestMatch(1002,self.OnMatchSuccess,self,self.IfAddOtherPlayers:GetIfAddPlayers())
+    else
+        print("Not all players are ready.")
+        UGCWidgetManagerSystem.ShowTipsUI("还有玩家未准备")
+    end
 end
 
 function UMG_Lobby_MainUI:ShopFightShop()
@@ -84,6 +95,7 @@ function UMG_Lobby_MainUI:AddLobbyTeammate(PS)
         print("Invalid PlayerState provided to AddLobbyTeammate.")
     end
 end
+
 function UMG_Lobby_MainUI:InitPlayerSlot(Slot)
     
 end

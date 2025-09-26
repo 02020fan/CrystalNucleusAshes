@@ -8,7 +8,9 @@ function UMG_Lobby_IfAddOtherPlayers:Construct()
 	
 end
 -- Construct ]==]
-
+function UMG_Lobby_IfAddOtherPlayers:GetIfAddPlayers()
+    return self.AutoAddPlayers:IsChecked()
+end
 -- function UMG_Lobby_IfAddOtherPlayers:Tick(MyGeometry, InDeltaTime)
 
 -- end
